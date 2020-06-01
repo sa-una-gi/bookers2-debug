@@ -2,8 +2,10 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @book_new = Book.new
   	@book = Book.find(params[:id])
     @user = User.find_by(id: @book.user_id)
+    @favs = Favorite.where(book_id: @book.id)
   end
 
   def index
