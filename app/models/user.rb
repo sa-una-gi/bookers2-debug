@@ -7,9 +7,14 @@ class User < ApplicationRecord
   has_many :books
   has_many :favorites,dependent: :destroy
   has_many :book_comments,dependent: :destroy
+  has_many :relationships
   attachment :profile_image, destroy: false
 
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, length: {maximum: 20, minimum: 2}
   validates :introduction, length: {maximum: 50}
+  def followed_by?(user,follower)
+    Relationship.where(user_id: user.id,follower_id: follower.id).exists?
+  end
+
 end
