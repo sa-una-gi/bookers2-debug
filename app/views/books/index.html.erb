@@ -37,6 +37,10 @@
 					 <td id="favorite-<%= book.id %>">
 	          <%= render partial: 'favorites/favorite',locals: {book: book} %>
 					</td>
+					<td>
+						<% book_comments = BookComment.where(book_id: book.id) %>
+						コメント数：<%= book_comments.count %>
+					</td>
 				</tr>
 				<% end %>
 			</tbody>

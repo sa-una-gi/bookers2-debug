@@ -3,7 +3,7 @@ class CreateBookComments < ActiveRecord::Migration[5.2]
     create_table :book_comments do |t|
       t.integer :user_id
       t.integer :book_id
-      t.string :comment
+      t.text :comment
 
       t.timestamps
     end
