@@ -15,7 +15,9 @@
 
 		<table class="table">
 				<tr>
-						<%= render 'books/book', book: @book %>
+						<span>
+							<%= render 'books/book', book: @book %>
+						</span>
 
 					<% if @user == current_user %>
 						<td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
@@ -25,42 +27,26 @@
 			</table>
 
 			<table>
-				<tbody>
-			<% @book_comments.each do |bc| %>
-				<tr>
-					<td>
-						<% user = User.find_by(id: bc.user_id) %>
-						<%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
-						<%= user.name %>
-					</td>
-					<td>
-						<%= bc.comment %>
-					</td>
-					<% if user == current_user %>
-					<td>
-						<%= link_to "Destroy",book_book_comment_path(bc.book,bc), method: :delete, class: "btn-sm btn-danger destroy_book_#{@book.id}" %>
-					</td>
-					<% end %>
-				</tr>
-			<% end %>
+				<tbody id="js-table-comment">
+						<%= render 'book_comments/comment_area', book_comments: @book_comments %>
 				</tbody>
 			</table>
 
-			<%= form_for [@book, @book_comment] do |f| %>
-				<% if @book_comment.errors.any? %>
-			    <div id="error_explanation">
-			      <h2><%= pluralize(@book_comment.errors.count, "error") %> prohibited this book from being saved:</h2>
+			<%= form_with(model:[@book, @book_comment], remote: true) do |f| %>
+					<% if @book_comment.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@book_comment.errors.count, "error") %> prohibited this book from being saved:</h2>
 
-			      <ul>
-			      <% @book_comment.errors.full_messages.each do |message| %>
-			        <li><%= messages %> <li>
-			      <% end %>
-			      </ul>
-			    </div>
-			  <% end %>
+				      <ul>
+				      <% @book_comment.errors.full_messages.each do |message| %>
+				        <li><%= messages %> <li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
 				<div>
 					<%= f.text_area :comment ,class: "col-lg-9 book_comment_comment　form-control" %>
-					<span><%= f.submit '送信', class: "btn btn-default btn-xs" %></span>
+					<span><%= f.submit '送信',id: "comment_body", class: "btn btn-default btn-xs" %></span>
 				</div>
 			<% end %>
 	</div>

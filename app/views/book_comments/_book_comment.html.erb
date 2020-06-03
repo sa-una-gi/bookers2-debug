@@ -1,0 +1,13 @@
+<td>
+  <% user = User.find_by(id: comment.user_id) %>
+  <%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
+  <%= user.name %>
+</td>
+<td>
+  <%= comment.comment %>
+</td>
+<% if user == current_user %>
+  <td>
+    <%= link_to "Destroy",book_book_comment_path(comment.book,comment), method: :delete, class: "btn-sm btn-danger destroy_book_#{@book.id}",remote: true %>
+  </td>
+<% end %>
