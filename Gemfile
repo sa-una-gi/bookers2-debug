@@ -78,3 +78,11 @@ gem "bootstrap-sass", "~>3.3.6"
 gem "jquery-ui-rails"
 
 gem 'jp_prefecture'
+
+gem 'dotenv-rails'
+
+gem 'http'
+
+gem "geocoder"
+
+

@@ -33,6 +33,38 @@
 		</table>
 		<!--books一覧 -->
 
-
 	</div>
 </div>
+
+<% if @user == current_user %>
+
+<h2>Your MAP</h2>
+<div id='map'></div>
+
+<style>
+#map{
+  height: 400px;
+}
+</style>
+
+<script>
+function initMap(){
+	var position = {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>};
+  var map = new google.maps.Map(document.getElementById('map'), {
+  center: position,
+  zoom: 8
+  });
+
+  var markerOptions = {
+    map: map,
+    position: position,
+  };
+
+  var marker = new google.maps.Marker(markerOptions);
+
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_JS_API_KEY']%>&callback=initMap" async defer></script>
+
+<% end %>

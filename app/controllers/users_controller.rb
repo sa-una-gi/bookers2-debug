@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@books = @user.books
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+    @address = @user.prefecture_code
+    results = Geocoder.search(@address)
+    @latlng = results.first.coordinates
   end
 
   def index

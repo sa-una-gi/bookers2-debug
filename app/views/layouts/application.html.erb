@@ -41,7 +41,7 @@
     </header>
     <!--ヘッダーの記述-->
     <div class="container">
-      <p id="notice"><%= notice %></p>
+      <p> </p>
       <div class="search">
         <% if user_signed_in? %>
           <%= form_tag(search_path, method: :get) do %>
@@ -52,6 +52,7 @@
           <% end %>
         <% end %>
       </div>
+      <p id="notice"><%= notice %></p>
        <!--デバイスでnotice設定されているので呼び出してるだけ-->
       <%= yield %>
     </div>
