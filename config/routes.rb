@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resource :relationships,only: [:create,:destroy]
     get '/follow' => 'relationships#follow'
     get '/follower' => 'relationships#follower'
+    get '/room/:id' => 'chats#show'
+    post '/room/:id' => 'chats#create'
   end
   root to: 'home#top'
   get 'home/about' => 'home#about'
