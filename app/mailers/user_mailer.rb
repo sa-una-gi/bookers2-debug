@@ -7,3 +7,5 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: '私の素敵なサイトへようこそ')
   end
 end
+
+

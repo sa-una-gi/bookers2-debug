@@ -10,6 +10,13 @@ class User < ApplicationRecord
     UserMailer.user_welcome_email(self).deliver
   end
 
+  def send_daily_email
+    users = User.all
+    users.each do |user|
+      DailyMailer.user_daily_email(user).deliver
+    end
+  end
+
   has_many :books,dependent: :destroy
   has_many :favorites,dependent: :destroy
   has_many :book_comments,dependent: :destroy
