@@ -9,6 +9,8 @@ class BooksController < ApplicationController
     @book_comment = BookComment.new
     @book_comments = BookComment.where(book_id: @book.id)
     @comments_count = @book_comments.count
+
+    open_chat_room
   end
 
   def index

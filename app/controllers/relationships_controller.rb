@@ -25,3 +25,4 @@ class RelationshipsController < ApplicationController
     @users = Relationship.where(follower_id: user.id)
   end
 end
+

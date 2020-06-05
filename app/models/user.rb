@@ -10,12 +10,12 @@ class User < ApplicationRecord
     UserMailer.user_welcome_email(self).deliver
   end
 
-  has_many :books
+  has_many :books,dependent: :destroy
   has_many :favorites,dependent: :destroy
   has_many :book_comments,dependent: :destroy
-  has_many :relationships
-  has_many :chats
-  has_many :user_rooms
+  has_many :relationships,dependent: :destroy
+  has_many :chats,dependent: :destroy
+  has_many :user_rooms,dependent: :destroy
   has_many :rooms, through: :user_rooms
   attachment :profile_image, destroy: false
 

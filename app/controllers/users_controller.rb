@@ -9,6 +9,24 @@ class UsersController < ApplicationController
     @address = @user.prefecture_code
     results = Geocoder.search(@address)
     @latlng = results.first.coordinates
+
+    open_chat_room
+    ## application_controller.rbに記述
+    # @your_rooms = @user.user_rooms
+    # @my_rooms = current_user.user_rooms
+    #   @your_rooms.each do |yroom|
+    #     @my_rooms.each do |mroom|
+    #       if yroom.room_id == mroom.room_id
+    #         @room = Room.find_by(id: yroom.room_id)
+    #       end
+    #     end
+    #   end
+
+    # unless @room
+    #   @room = Room.create
+    #   @your_room = @user.user_rooms.create(room_id: @room.id)
+    #   @my_room = current_user.user_rooms.create(room_id: @room.id)
+    # end
   end
 
   def index

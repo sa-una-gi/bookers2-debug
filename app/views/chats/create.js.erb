@@ -1,0 +1,2 @@
+$("#chat-room-<%= @room.id %>").html("<%= j(render  'chats', chats: @chats,user: @user) %>");
+$("input").val('')

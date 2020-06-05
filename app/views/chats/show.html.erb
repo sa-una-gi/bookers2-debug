@@ -1,18 +1,12 @@
-<div> こんにちは </div>
-
 <h1><%= @user.name %>さんとのチャット</h1>
 
 <div class="col-xs-4">
-<% @chats.each do |c| %>
 
-  <% if c.user_id == @user.id %>
-    <div class="your-chat"><%= c.message %></div>
-  <% else %>
-    <div class="my-chat"><%= c.message %></div>
-  <% end %>
-<% end %>
+<div id="chat-room-<%= @room.id %>">
+  <%= render 'chats', chats: @chats,user: @user %>
+</div>
 
-<%= form_for(@chat,url: "/users/#{@user.id}/room/#{@room.id}") do |f| %>
+<%= form_for(@chat,url: "/users/#{@user.id}/room/#{@room.id}",remote: true) do |f| %>
 
   <%= f.text_field :message %>
 

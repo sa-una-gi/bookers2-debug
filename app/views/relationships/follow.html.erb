@@ -12,21 +12,21 @@
 
       <tbody>
         <% @users.each do |u| %>
-          <% follower = User.find_by(id: u.follower_id) %>
+          <% followee = User.find_by(id: u.follower_id) %>
           <tr>
-            <td><%= attachment_image_tag(follower, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
-            <td><%= follower.name %></td>
-            <td>フォロー数:<%= follower.relationships.count %></td>
-            <td><% followers = Relationship.where(follower_id: follower.id) %>
-              フォロワー数:<%= followers.count %></td>
+            <td><%= attachment_image_tag(followee, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+            <td><%= followee.name %></td>
+            <td>フォロー数:<%= followee.relationships.count %></td>
+            <td>フォロワー数:
+              <%= Relationship.where(follower_id: followee.id).count %></td>
 
-        <% if follower.followed_by?(current_user,follower) %>
-            <td><%= link_to'フォロー外す',user_relationships_path(follower),method: :delete %></td>
+        <% if followee.followed_by?(current_user,followee) %>
+            <td><%= link_to'フォロー外す',user_relationships_path(followee),method: :delete %></td>
         <% else %>
-            <td><%= link_to'フォローする',user_relationships_path(follower),method: :post %></td>
+            <td><%= link_to'フォローする',user_relationships_path(followee),method: :post %></td>
         <% end %>
 
-            <td><%= link_to "Show", u.user, class: "user_#{u.user.id}" %></td>
+            <td><%= link_to "Show", followee, class: "user_#{followee.id}" %></td>
           </tr>
         <% end %>
       </tbody>
