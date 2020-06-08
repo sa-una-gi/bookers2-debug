@@ -17,17 +17,19 @@
 @import "bootstrap-sprockets";  /*ここを追加*/
 @import "bootstrap";            /*ここを追加*/
 
-header {
-	color:white;
-}
 
-header .navbar-left span {
-	font-size: 20px;
-	padding-top: 10px;
-}
 
 body {
 	margin-top: 40px;
+  header {
+    color:white;
+    .navbar-left{
+      span{
+        font-size: 20px;
+        padding-top: 10px;
+      }
+    }
+  }
 }
 
 .actions {
@@ -38,12 +40,4 @@ body {
   width:100%;
   padding:10px;
   text-align:center;
-}
-
-.your-chat {
-  text-align:left;
-}
-
-.my-chat {
-  text-align:right;
 }
