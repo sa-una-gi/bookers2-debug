@@ -60,7 +60,7 @@ group :test do
   gem 'rspec-rails'
   gem "factory_bot_rails"
   gem 'rspec-parameterized'
-  gem 'faker' #ランダム値の生成
+  gem 'faker' # ランダム値の生成
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
 end
@@ -85,5 +85,6 @@ gem 'http'
 
 gem "geocoder"
 
-gem 'whenever',require: false
+gem 'whenever', require: false
 
+gem 'rubocop-airbnb'

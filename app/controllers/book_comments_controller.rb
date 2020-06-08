@@ -13,13 +13,15 @@ class BookCommentsController < ApplicationController
     @comment = BookComment.find(params[:id])
     @book_comments = BookComment.where(book_id: @book.id)
     BookComment.find_by(
-                  id: params[:id],
-                  book_id: params[:book_id]).destroy
+      id: params[:id],
+      book_id: params[:book_id]
+    ).destroy
     # book_comment.destroy
     # redirect_back(fallback_location: root_path)
   end
 
   private
+
   def book_comment_params
     params.require(:book_comment).permit(:comment)
   end

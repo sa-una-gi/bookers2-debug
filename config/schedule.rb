@@ -32,8 +32,7 @@ set :environment, :development
 # end
 #
 every 1.days, at: '9:00 am' do
-
-# Rails内のメソッド実行
+  # Rails内のメソッド実行
   runner "User.send_daily_email"
 end
 
