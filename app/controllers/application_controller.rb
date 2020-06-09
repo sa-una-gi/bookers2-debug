@@ -6,21 +6,17 @@ class ApplicationController < ActionController::Base
   # ２ユーザーのチャットルームが既にあればその情報を@roomで取得
   # なければ新たにルームを作成し、
   def open_chat_room
-    @your_rooms = @user.user_rooms
-    @my_rooms = current_user.user_rooms
-    @your_rooms.each do |yroom|
-      @my_rooms.each do |mroom|
-        if yroom.room_id == mroom.room_id
-          @room = Room.find_by(id: yroom.room_id)
-        end
-      end
+    @my_rooms = current_user.user_rooms.pluck(:room_id)
+    user_room = UserRoom.find_by(user_id: @user.id,room_id: @my_rooms)
+
+    unless user_room.nil?
+      @room = user_room.room
+    else
+      @room = Room.create
+      @user.user_rooms.create(room_id: @room.id)
+      current_user.user_rooms.create(room_id: @room.id)
     end
 
-    unless @room
-      @room = Room.create
-      @your_room = @user.user_rooms.create(room_id: @room.id)
-      @my_room = current_user.user_rooms.create(room_id: @room.id)
-    end
   end
 
   protected
